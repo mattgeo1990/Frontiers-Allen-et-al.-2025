@@ -1,0 +1,96 @@
+"OMNH.Item..","Specimen.ID","Taxon","Habitat","Eva_.Sens","eco_type","Element.type","samp_type","d18O","n","SD","SE"
+"60378","60378-a","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",14.84541451,1,NA,NA
+"60386","60386-a","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",12.76557415,1,NA,NA
+"60386","60386-b","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",13.12658347,1,NA,NA
+"60444","60444-a","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",14.16793479,1,NA,NA
+"60447","60447-a","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",14.42850063,1,NA,NA
+"61401","61401-a","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",11.14313235,1,NA,NA
+"61402","61402-a","Glyptops sp.","semi-aquatic","EI","Aquatic Turtle","osteoscute fragment","",16.125960765,2,1.41755983914904,1.002366175
+"61224","61224-a","Neosuchian A","terrestrial","EI","Croc A","tooth","",15.33293958,1,NA,NA
+"61224","61224-b","Neosuchian A","terrestrial","EI","Croc A","tooth","",15.09904066,1,NA,NA
+"61283","61283-a","Neosuchian A","terrestrial","EI","Croc A","tooth","",17.24106161,1,NA,NA
+"61283","61283-b","Neosuchian A","terrestrial","EI","Croc A","tooth","",16.86220959,1,NA,NA
+"61284","61284-a","Neosuchian A","terrestrial","EI","Croc A","tooth","",15.58637508,1,NA,NA
+"61286","61286-a","Neosuchian A","terrestrial","EI","Croc A","tooth","",16.92962087,1,NA,NA
+"61286","61286-b","Neosuchian A","terrestrial","EI","Croc A","tooth","",18.3246319,1,NA,NA
+"61286","61286-c","Neosuchian A","terrestrial","EI","Croc A","tooth","",15.49069451,2,0.0435867549569843,0.03082049
+"61286","61286-d","Neosuchian A","terrestrial","EI","Croc A","tooth","",23.14423417,1,NA,NA
+"UNCAT002","UNCAT002-a","Neosuchian A","terrestrial","","Croc A","tooth","",16.16911066,1,NA,NA
+"UNCAT003","UNCAT003-a","Neosuchian A","terrestrial","","Croc A","tooth","",17.96348348,1,NA,NA
+"61289","61289-a","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",14.93984365,1,NA,NA
+"61289","61289-b","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",16.43437907,1,NA,NA
+"61289","61289-c","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",18.13089755,1,NA,NA
+"61289","61289-d","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",18.59894675,1,NA,NA
+"61289","61289-e","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",18.2587364,1,NA,NA
+"61289","61289-f","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",16.38939855,1,NA,NA
+"61289","61289-g","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",13.13811675,1,NA,NA
+"61289","61289-h","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",19.19894981,1,NA,NA
+"61289","61289-i","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",16.87756027,1,NA,NA
+"61289","61289-j","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",14.96614076,1,NA,NA
+"61327","61327-a","Neosuchian B","Semi-aquatic","EI","Croc B","tooth","",15.48203693,1,NA,NA
+"60433","60433-a","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",17.40248992,1,NA,NA
+"60433","60433-b","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",12.82166679,1,NA,NA
+"60433","60433-c","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",13.22586145,1,NA,NA
+"60433","60433-e","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",10.26975838,1,NA,NA
+"60433","60433-f","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",9.753627578,1,NA,NA
+"60433","60433-g","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",13.38731078,1,NA,NA
+"60442","60442-a","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","serial",13.046698835,2,0.0277264276367162,0.0196055450000001
+"61309","61309-a","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",17.24457823,1,NA,NA
+"61309","61309-b","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",16.93901814,2,0.247589691766528,0.175072349999999
+"61309","61309-d","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",15.8785373,1,NA,NA
+"61399","61399-b","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",10.97414118,1,NA,NA
+"61399","61399-a","Neosuchian G","Semi-aquatic","EI","Croc G","tooth","",17.61436836,1,NA,NA
+"27858","27858-c","Lepisosteids","aquatic","EI","Fish","tooth","bulk",13.25065404,1,NA,NA
+"27858","27858-d","Lepisosteids","aquatic","EI","Fish","tooth","bulk",15.55814106,1,NA,NA
+"27858","27858-f","Lepisosteids","aquatic","EI","Fish","tooth","bulk",12.10134695,1,NA,NA
+"27858","27858-h","Lepisosteids","aquatic","EI","Fish","tooth","bulk",14.12119185,1,NA,NA
+"27873","27873-a","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",14.7533333333333,3,0.270985854489368,0.156453756036018
+"27873","27873-b","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",13.77,3,3.2016870552882,1.84849488323158
+"27873","27873-c","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",12.99,1,NA,NA
+"27873","27873-d","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",15.57,1,NA,NA
+"27873","27873-e","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",15.42,2,0.42426406871193,0.300000000000001
+"27873","27873-j","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",15.65,1,NA,NA
+"61221","61221-a","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",14.21929209,1,NA,NA
+"61221","61221-b","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",12.60158682,1,NA,NA
+"61221","61221-c","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",14.76139967,1,NA,NA
+"61221","61221-e","Lepisosteids","aquatic","EI","Fish","ganoid scale","bulk",14.87163958,1,NA,NA
+"61573","61573-a","Lepisosteids","aquatic","EI","Fish","tooth","bulk",13.99884977,1,NA,NA
+"61573","61573-b","Lepisosteids","aquatic","EI","Fish","tooth","bulk",11.52110142,1,NA,NA
+"61573","61573-c","Lepisosteids","aquatic","","Fish","tooth","bulk",9.468175898,1,NA,NA
+"60391","60391-a","Allosauroid","terrestrial","ES","Large Theropod","tooth fragment","serial",14.72616354,4,0.327206602691329,0.163603301345665
+"60430","60430-b","Ornithischians","terrestrial","ES","Ornithischian","tooth","",19.53171901,1,NA,NA
+"61341","61341-a","Ornithischians","terrestrial","ES","Ornithischian","tooth","",17.02903048,1,NA,NA
+"61389","61389-a","Ornithischians","terrestrial","ES","Ornithischian","tooth","",14.17646587,1,NA,NA
+"80794","80794-a","Ornithischians","terrestrial","","Ornithischian","tooth fragment","bulk",13.795,2,0.0353553390593279,0.0250000000000004
+"80795","80795-c","Ornithischians","terrestrial","","Ornithischian","","",13.53,1,NA,NA
+"80795","80795-d","Ornithischians","terrestrial","","Ornithischian","","",15.89,2,0.212132034355964,0.149999999999999
+"60422","60422-a","Sauropods","terrestrial","","Sauropoda","tooth","",15.99889522,1,NA,NA
+"60423","60423-a","Sauropods","terrestrial","","Sauropoda","tooth","",18.99983903,1,NA,NA
+"60427","60427-a","Sauropods","terrestrial","ES","Sauropoda","tooth","serial",16.5326545,3,0.287448218898903,0.16595830655936
+"60482","60482-a","Sauropods","terrestrial","ES","Sauropoda","tooth","",21.78768467,2,0.972532986950066,0.687684669999999
+"60484","60484-a","Sauropods","terrestrial","ES","Sauropoda","tooth","",18.59571597,1,NA,NA
+"61220","61220-a","Sauropods","terrestrial","ES","Sauropoda","tooth","",19.1076203,1,NA,NA
+"UNCAT001","UNCAT001-a","Sauropods","terrestrial","","Sauropoda","tooth","",15.13298883,1,NA,NA
+"80859","80859-a","Hybodonts","aquatic","","Shark","","",10.8,1,NA,NA
+"80859","80859-b","Hybodonts","aquatic","","Shark","","",15.27,1,NA,NA
+"80859","80859-c","Hybodonts","aquatic","","Shark","","",9.77,1,NA,NA
+"60406","60406-a","Maniraptorans","terrestrial","ES","Small Theropod","tooth","",14.22288194,1,NA,NA
+"60406","60406-b","Maniraptorans","terrestrial","ES","Small Theropod","tooth","",17.55405804,1,NA,NA
+"60406","60406-c","Maniraptorans","terrestrial","ES","Small Theropod","tooth","",13.71248653,1,NA,NA
+"60406","60406-e","Maniraptorans","terrestrial","ES","Small Theropod","tooth","",23.22319825,1,NA,NA
+"61348","61348-a","Maniraptorans","terrestrial","","Small Theropod","tooth","",13.65553388,1,NA,NA
+"61351","61351-a","Maniraptorans","terrestrial","ES","Small Theropod","tooth","",12.72700545,1,NA,NA
+"61352","61352-a","Maniraptorans","terrestrial","ES","Small Theropod","tooth","",17.16617443,1,NA,NA
+"61355","61355-a","Maniraptorans","terrestrial","","Small Theropod","tooth","",14.30604066,1,NA,NA
+"61357","61357-a","Maniraptorans","terrestrial","ES","Small Theropod","tooth","serial",13.8523666,1,NA,NA
+"61361","61361-a","Maniraptorans","terrestrial","","Small Theropod","tooth","",17.44573973,1,NA,NA
+"60379","60379-a","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",13.29354208,1,NA,NA
+"60379","60379-b","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",13.77083135,1,NA,NA
+"60379","60379-c","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.06762098,1,NA,NA
+"60379","60379-d","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",15.02865964,1,NA,NA
+"60379","60379-e","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.1069935,1,NA,NA
+"60379","60379-h","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.30036154,1,NA,NA
+"60379","60379-i","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.15635209,1,NA,NA
+"60379","60379-j","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.81588951,1,NA,NA
+"60379","60379-m","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.93893865,1,NA,NA
+"60379","60379-r","Naomichelys sp.","terrestrial","ES","Terrestrial Turtle","osteoscute fragment","",14.91338284,1,NA,NA
