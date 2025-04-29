@@ -1,15 +1,18 @@
 ---
 title: "V1075 Monte Carlo Report"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
   html_document:
     toc: yes
     toc_depth: 2
     number_sections: yes
     theme: flatly
 ---
+<!--a note -->
+
+**Note:** All data and code used for analyses and modeling are organized within an RStudio Project available at:  
+[https://github.com/mattgeo1990/Frontiers-Allen-et-al.-2025/tree/main/Frontiers_V1075_Project](https://github.com/mattgeo1990/Frontiers-Allen-et-al.-2025/tree/main/Frontiers_V1075_Project)
+
+Opening the `Frontiers_V1075_Project.Rproj` file will automatically set the working directory correctly.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -90,12 +93,8 @@ summary_d18Op <- combined_data %>%
   )
 
 summary_d18Op
-```
 
-# Histograms of Resampled Means {#histograms}
-
-```{r}
-
+# Prepare to plot histogram of water temperature simulations
 combined_data$group <- factor(combined_data$group, 
   levels = names(taxa_list))
 
@@ -107,7 +106,7 @@ ggplot(combined_data, aes(x = values, fill = group)) +
   facet_wrap(~group, scales = "free")
 ```
 
-# Water δ18Osw Simulations {#d18Osw_simulation}
+# Water d18Osw Simulations {#d18Osw_simulation}
 
 ```{r}
 
