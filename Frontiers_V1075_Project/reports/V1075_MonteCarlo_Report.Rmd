@@ -1,102 +1,115 @@
+---
+title: "V1075 Monte Carlo Report"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+    number_sections: yes
+    theme: flatly
+---
 
-# Setup -----------------------
-
-# Load required libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(dplyr)
 library(ggplot2)
+library(readr)
+library(here)
+```
 
-# Set paths
-project_dir <- getwd()
-data_dir <- file.path(project_dir, "data")
-models_dir <- file.path(project_dir, "models")
-results_dir <- file.path(project_dir, "results")
+# Setup {#setup}
 
-# Set number of Monte Carlo repetitions
+```{r}
+
+# Define directories using here::here()
+# Correct project-relative paths
+data_dir <- here("data")
+results_dir <- here("results")
+models_dir <- here("models")
+
+# Read in data
+V1075_MCdata <- read_csv(file.path(data_dir, "V1075MC_data.csv"))
+NIST120c <- read_csv(file.path(data_dir, "V1075_NIST120c.csv"))
+
+# Load models using project-root-relative paths
+Amiot_lm <- readRDS(here("models", "Amiot_reg_lm.rds"))
+Barrick_lm <- readRDS(here("models", "Barrick_reg_lm.rds"))
+PLN_lm <- readRDS(here("models", "PLNd18Op_reg_lm.rds"))
+TwTa_lm <- readRDS(here("models", "TwTa_reg_lm.rds"))
+
+# Set constants
 n_iterations <- 1000
-set.seed(123) # for reproducibility 
+set.seed(123)
+```
 
-# Load sample data and NIST standard
-data <- read.csv(file.path(data_dir, "V1075MC_data.csv"))
-NIST120c <- read.csv(file.path(data_dir, "V1075_NIST120c.csv"))
+# Bootstrapping d18Op by Taxon {#bootstrapping}
 
-# Load regression models
-Barrick_lm <- readRDS(file.path(models_dir, "Barrick_reg_lm.rds"))
-Amiot_lm <- readRDS(file.path(models_dir, "Amiot_reg_lm.rds"))
-PLN_lm <- readRDS(file.path(models_dir, "PLNd18Op_reg_lm.rds"))
-TwTa_lm <- readRDS(file.path(models_dir, "TwTa_reg_lm.rds"))
+```{r}
 
-# d18Op Bootstrapping -----------------------
-
-# Define taxa
+# Subset taxa into a list of vectors
 taxa_list <- list(
-  Lepisosteidae      = subset(data, Taxon == "Lepisosteids")$d18O,
-  Hybodontiformes    = subset(data, Taxon == "Hybodonts")$d18O,
-  `Glyptops sp.`     = subset(data, Taxon == "Glyptops sp.")$d18O,
-  `Naomichelys sp.`  = subset(data, Taxon == "Naomichelys sp.")$d18O,
-  `Neosuchian G`     = subset(data, Taxon == "Neosuchian G")$d18O,
-  `Neosuchian A`     = subset(data, Taxon == "Neosuchian A")$d18O,
-  `Neosuchian B`     = subset(data, Taxon == "Neosuchian B")$d18O,
+  Lepisosteidae       = subset(V1075_MCdata, Taxon == "Lepisosteids")$d18O,
+  Hybodontiformes     = subset(V1075_MCdata, Taxon == "Hybodonts")$d18O,
+  `Glyptops sp.`      = subset(V1075_MCdata, Taxon == "Glyptops sp.")$d18O,
+  `Naomichelys sp.`   = subset(V1075_MCdata, Taxon == "Naomichelys sp.")$d18O,
+  `Neosuchian G`      = subset(V1075_MCdata, Taxon == "Neosuchian G")$d18O,
+  `Neosuchian A`      = subset(V1075_MCdata, Taxon == "Neosuchian A")$d18O,
+  `Neosuchian B`      = subset(V1075_MCdata, Taxon == "Neosuchian B")$d18O,
   NIST12Oc_aka_NBS120c = NIST120c$d.18O.16O
 )
 
-# Bootstrap function
-bootstrap_means <- function(values, n_reps) {
-  tibble(
-    num = 1:n_reps,
-    means = replicate(n_reps, mean(sample(values, replace = TRUE)))
-  )
+# Define bootstrap function
+taxon_bootstrap <- function(values) {
+  data.frame(means = replicate(n_iterations, mean(sample(values, replace = TRUE))))
 }
 
+# Apply bootstrap to each taxon
+bootstrap_results <- lapply(taxa_list, taxon_bootstrap)
 
-# Perform bootstrapping for each taxon
-bootstrap_results <- lapply(taxa_list, bootstrap_means, n_reps = n_iterations)
+# Name the results list for easy access
+names(bootstrap_results) <- names(taxa_list)
 
-# Combine bootstrap results into one dataframe
+bootstrap_results <- lapply(taxa_list, taxon_bootstrap)
+
+# Combine bootstrap data
 combined_data <- bind_rows(
-  lapply(names(bootstrap_results), function(taxon) {
-    tibble(
-      group = taxon,
-      values = bootstrap_results[[taxon]]$means
-    )
+  lapply(names(bootstrap_results), function(t) {
+    tibble(group = t, values = bootstrap_results[[t]]$means)
   })
 )
 
 # Summarize d18Op
-d18Op_summary <- combined_data %>%
+summary_d18Op <- combined_data %>%
   group_by(group) %>%
   summarise(
-    Mean_d18Op = mean(values, na.rm = TRUE),
+    Mean_d18Op = mean(values),
     CI_Lower = quantile(values, 0.025, na.rm = TRUE),
     CI_Upper = quantile(values, 0.975, na.rm = TRUE)
-  ) %>%
-  relocate(group)
+  )
 
-# Export summary
-saveRDS(d18Op_summary, file.path(results_dir, "d18Op_summary.rds"))
-print(d18Op_summary)
+summary_d18Op
+```
 
-# Correct factor levels for plotting
-combined_data$group <- factor(combined_data$group, levels = c(
-  "Lepisosteidae",
-  "Hybodontiformes",
-  "Glyptops sp.",
-  "Naomichelys sp.",
-  "Neosuchian G",
-  "Neosuchian A",
-  "Neosuchian B",
-  "NIST12Oc_aka_NBS120c"
-))
+# Histograms of Resampled Means {#histograms}
 
-# Plot histogram of resampled means for each taxon
+```{r}
+
+combined_data$group <- factor(combined_data$group, 
+  levels = names(taxa_list))
+
+# Plot
 ggplot(combined_data, aes(x = values, fill = group)) +
   geom_histogram(position = "identity", alpha = 0.7, bins = 30, color = "black") +
-  labs(title = "Histogram of Means by Taxon",
-       x = "Resampled Mean δ18Op",
-       y = "Frequency") +
+  labs(title = "Histogram of Resampled Means", x = "d18O_p Values", y = "Frequency") +
   theme_minimal() +
   facet_wrap(~group, scales = "free")
+```
 
-# d18Ow Simulations -----------------------
+# Water δ18Osw Simulations {#d18Osw_simulation}
+
+```{r}
 
 # Create d18Osw simulation function
 simulate_water <- function(means_vector, model) {
@@ -125,6 +138,7 @@ water_sim_results <- list()
 water_sim_distributions <- list()
 
 # Loop over each target taxon
+set.seed(123)
 for (taxon in names(water_sim_targets)) {
   sim_result <- simulate_water(bootstrap_results[[taxon]]$means, water_sim_targets[[taxon]])
   
@@ -143,7 +157,6 @@ for (taxon in names(water_sim_targets)) {
 }
 
 # Simulate single d18Ow distribution based on crocG and Glyptops d18Ow
-
 bootstrapped_d18Ow <- replicate(n_iterations, {
   sample_glyp <- sample(water_sim_distributions[["Glyptops sp."]], size = 1, replace = TRUE)
   sample_crocG <- sample(water_sim_distributions[["Neosuchian G"]], size = 1, replace = TRUE)
@@ -164,7 +177,11 @@ cat("Mean δ¹⁸Ow:", mean_d18Ow, "\n")
 cat("95% CI for δ¹⁸Ow: [", quantiles[1], ",", quantiles[2], "]\n")
 
 
-# Water Temperature (Tw) Simulations -----------------------
+```
+
+# Water Temperature Simulations {#water_temperature_simulations}
+
+```{r}
 
 delta_Op <- combined_data$values[combined_data$group == "Lepisosteidae"]
 delta_Ow <- bootstrapped_d18Ow
@@ -217,8 +234,10 @@ ggplot(data.frame(Tw = Tw_simulations), aes(x = Tw)) +
 
 ggsave(file.path(results_dir, "Tw_Histogram.png"))
 
+```
+# Air Temperature Simulations {#air_temperature_simulations}
 
-# Air Temperature (Ta) Simulations -----------------------
+```{r}
 
 # Simulate intercept and slope
 intercept_sim <- rnorm(n_iterations, mean = coef(TwTa_lm)[1], sd = summary(TwTa_lm)$coefficients[1, 2])
@@ -262,3 +281,10 @@ ggplot(data.frame(Ta = Ta_simulations), aes(x = Ta)) +
   theme_minimal()
 
 ggsave(file.path(results_dir, "Ta_Histogram.png"))
+
+```
+
+
+# Conclusion {#conclusion}
+
+This R Markdown processes and simulates δ¹⁸O values, reconstructs water and air temperatures using Monte Carlo resampling, and plots the distributions of the results.
