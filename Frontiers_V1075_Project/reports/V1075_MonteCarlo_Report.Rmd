@@ -1,18 +1,46 @@
 ---
 title: "V1075 Monte Carlo Report"
 output:
-  html_document:
-    toc: yes
+  pdf_document:
+    toc: true
+    number_sections: true
     toc_depth: 2
-    number_sections: yes
-    theme: flatly
+    keep_tex: true
 ---
-<!--a note -->
 
-**Note:** All data and code used for analyses and modeling are organized within an RStudio Project available at:  
-[https://github.com/mattgeo1990/Frontiers-Allen-et-al.-2025/tree/main/Frontiers_V1075_Project](https://github.com/mattgeo1990/Frontiers-Allen-et-al.-2025/tree/main/Frontiers_V1075_Project)
+```{=latex}
+\vspace{1em}
+\begin{center}
+\begin{minipage}{0.95\textwidth}
+\setlength{\fboxsep}{10pt}
+\noindent\colorbox{gray!10}{
+  \parbox{\textwidth}{
+    \textbf{\large Purpose:} This report performs Monte Carlo simulations to quantify uncertainty in estimates of $\delta^{18}$O$_{surface.water}$ ($\delta^{18}$O$_{sw}$) and paleotemperature derived from $\delta^{18}$O$_{phosphate}$ ($\delta^{18}$O$_{p}$) values of vertebrate fossils collected from the V1075 bonebed of the Cloverly Formation.
 
-Opening the `Frontiers_V1075_Project.Rproj` file will automatically set the working directory correctly.
+    \vspace{0.5em}
+
+    \textbf{\large Structure:} The document includes steps for data loading, bootstrapping of $\delta^{18}$O$_{p}$, simulation of $\delta^{18}$O$_{sw}$ and paleotemperature distributions, and uncertainty quantification.
+
+    \vspace{0.5em}
+
+    \textbf{\large Reproducibility:}To run this report, open the associated RStudio Project file (\texttt{Frontiers\_V1075\_Project.Rproj}). This automatically sets the correct working directory. Then run this \texttt{.Rmd} file.
+
+    \vspace{0.5em}
+
+    \textbf{\large Repository:} All data and code used are provided at:
+    \href{https://github.com/mattgeo1990/Frontiers-Allen-et-al.-2025/tree/main/Frontiers_V1075_Project}{\color{blue}\texttt{github.com/.../Frontiers\_V1075\_Project}}\\
+    → Start by reading the \texttt{README.md} file in that directory.
+
+    \vspace{0.5em}
+
+    \textbf{\large Citation:} Allen et al., 2025. \textit{Frontiers in Earth Science}, DOI:\\
+    \href{https://doi.org/10.3389/feart.2025.1497416}{10.3389/feart.2025.1497416}
+  }
+}
+\end{minipage}
+\end{center}
+\vspace{2em}
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -47,7 +75,7 @@ n_iterations <- 1000
 set.seed(123)
 ```
 
-# Bootstrapping d18Op by Taxon {#bootstrapping}
+# Bootstrapping $\delta^{18}O_{p}$ by Taxon {#bootstrapping}
 
 ```{r}
 
@@ -94,7 +122,7 @@ summary_d18Op <- combined_data %>%
 
 summary_d18Op
 
-# Prepare to plot histogram of water temperature simulations
+# Prepare to plot histogram of d18Op simulations
 combined_data$group <- factor(combined_data$group, 
   levels = names(taxa_list))
 
@@ -106,7 +134,7 @@ ggplot(combined_data, aes(x = values, fill = group)) +
   facet_wrap(~group, scales = "free")
 ```
 
-# Water d18Osw Simulations {#d18Osw_simulation}
+# Water $\delta^{18}O_{sw}$ Simulations {#d18Osw_simulation}
 
 ```{r}
 
@@ -172,10 +200,45 @@ alld18Owater_lower <- quantiles[1]
 alld18Owater_upper <- quantiles[2]
 
 # Print results
-cat("Mean δ¹⁸Ow:", mean_d18Ow, "\n")
-cat("95% CI for δ¹⁸Ow: [", quantiles[1], ",", quantiles[2], "]\n")
+cat(paste0("Mean $\\delta^{18}O_{w}$: ", round(mean_d18Ow, 2), "\n"))
+cat(paste0("95\\% CI for $\\delta^{18}O_{w}$: [", round(quantiles[1], 2), ", ", round(quantiles[2], 2), "]\n"))
 
 
+mean_alld18Owater_synth <- mean_d18Ow
+alld18Owater_lower <- quantiles[1]
+alld18Owater_upper <- quantiles[2]
+
+# Plot d18Osw Histogram
+# Compute y-axis range for label placement
+temp_plot <- ggplot(data.frame(d18Ow = bootstrapped_d18Ow), aes(x = d18Ow)) +
+  geom_histogram(bins = 50)
+y_max <- max(ggplot_build(temp_plot)$data[[1]]$count)
+buffer <- y_max * 0.1
+label_y <- y_max + buffer
+
+# Generate plot
+ggplot(data.frame(d18Ow = bootstrapped_d18Ow), aes(x = d18Ow)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 50) +
+  geom_vline(xintercept = mean_alld18Owater_synth, color = "red", linetype = "dashed") +
+  geom_vline(xintercept = c(alld18Owater_lower, alld18Owater_upper), color = "blue", linetype = "dotted") +
+  annotate("text", x = mean_alld18Owater_synth, y = label_y,
+           label = paste("Mean =", round(mean_alld18Owater_synth, 2)),
+           vjust = 0, color = "red", size = 3.5) +
+  annotate("text", x = alld18Owater_lower, y = label_y,
+           label = paste("Lower 95% CI =", round(alld18Owater_lower, 2)),
+           vjust = 0, color = "blue", size = 3.5, hjust = 1.1) +
+  annotate("text", x = alld18Owater_upper, y = label_y,
+           label = paste("Upper 95% CI =", round(alld18Owater_upper, 2)),
+           vjust = 0, color = "blue", size = 3.5, hjust = -0.1) +
+  ylim(0, label_y * 1.1) +
+  labs(
+    title = expression("Simulated "*delta^18*"O"[sw]*" distribution"),
+    x = expression(delta^18*"O"[sw]*" (permil VSMOW)"),
+    y = "Count"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(results_dir, "d18Osw_Histogram.png"))
 ```
 
 # Water Temperature Simulations {#water_temperature_simulations}
@@ -283,7 +346,3 @@ ggsave(file.path(results_dir, "Ta_Histogram.png"))
 
 ```
 
-
-# Conclusion {#conclusion}
-
-This R Markdown processes and simulates δ¹⁸O values, reconstructs water and air temperatures using Monte Carlo resampling, and plots the distributions of the results.
